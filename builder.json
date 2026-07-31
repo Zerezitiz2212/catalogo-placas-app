@@ -6,7 +6,8 @@
     "repo": "catalogo-placas-app"
   },
   "ios": {
-    "path": "ios/App"
+    "path": "ios/App",
+    "scheme": "App"
   },
   "flutter": {
     "watch": {}
