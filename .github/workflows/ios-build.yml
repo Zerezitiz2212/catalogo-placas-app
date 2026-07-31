@@ -143,6 +143,9 @@ jobs:
       - name: Install npm dependencies
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: npm install
+      
+      - name: Sync Capacitor (genera la carpeta public de iOS)
+        run: npx cap sync ios
 
       - name: Restore Pods cache
         uses: actions/cache@v4
