@@ -1,0 +1,78 @@
+CATÁLOGO DE PLACAS — ACTUALIZACIÓN (OCR + marca de agua + precio orientativo)
+================================================================================
+
+Esto es una ACTUALIZACIÓN del proyecto que ya montaste. Añade:
+
+  1. Marca de agua "Electrónica Imperial · app por Studio Z" en la cabecera
+  2. Detección automática de texto en la foto (OCR), 100% offline, intenta
+     rellenar Modelo y Nº de serie solos — revisa siempre lo que detecte
+  3. Botón "Ver precios" junto al precio: abre una búsqueda en Google Shopping
+     con marca+modelo para orientarte. ESTO SÍ NECESITA INTERNET en el
+     momento en que lo pulses (es un enlace de búsqueda, no builtin). El
+     resto de la app sigue funcionando 100% sin conexión.
+
+La app ahora pesa más (~9-10 MB) porque el motor de reconocimiento de texto
+va incluido dentro. Sigue sin depender de ningún servidor propio.
+
+
+CÓMO ACTUALIZAR TU PROYECTO YA MONTADO
+-----------------------------------------
+
+1. Descomprime este ZIP nuevo en OTRA carpeta (no la mezcles con la anterior
+   directamente para evitar líos).
+
+2. Copia estas carpetas/archivos de la carpeta nueva a tu carpeta de proyecto
+   original (catalogo-placas-capacitor), REEMPLAZANDO lo que ya había:
+
+     - src/app.jsx
+     - www/  (toda la carpeta entera, incluye bundle.js, vendor/, tessdata/)
+     - package.json
+
+   (No toques la carpeta "android" que ya se generó, ni "node_modules".)
+
+3. Abre la terminal en tu carpeta de proyecto (la de siempre) y ejecuta:
+
+     npm install
+
+   Esto instalará tesseract.js (el motor de OCR), que es nuevo.
+
+4. Sincroniza con el proyecto Android:
+
+     npx cap sync
+
+5. Abre Android Studio (si no está ya abierto):
+
+     npx cap open android
+
+6. Genera el APK de nuevo:
+
+     Build > Build Bundle(s) / APK(s) > Build APK(s)
+
+7. Igual que la vez anterior, encuentra el archivo en:
+
+     android/app/build/outputs/apk/debug/app-debug.apk
+
+   Pásalo al móvil y reinstálalo (sobrescribe la versión anterior sin
+   problema).
+
+
+SOBRE EL OCR (DETECCIÓN DE TEXTO)
+--------------------------------------
+- Tarda unos segundos en analizar cada foto (verás "Detectando texto...")
+- Funciona mejor con texto grande, impreso y sin reflejos
+- Si detecta algo con formato "MOD: XXXX" o "S/N: XXXX" lo intenta poner
+  directamente en Modelo / Nº de serie
+- Si no encuentra un patrón claro, vuelca el texto que ha leído en las
+  Notas para que tú decidas qué usar
+- SIEMPRE revisa los campos antes de guardar — no es infalible
+
+
+SOBRE EL BOTÓN "VER PRECIOS"
+--------------------------------
+No es una IA comparando precios en tiempo real ni nada automático: abre
+una pestaña del navegador con una búsqueda de Google Shopping ya rellenada
+con la marca y el modelo, para que veas de un vistazo precios de referencia
+en otras tiendas. Necesita que el móvil tenga internet en ese momento.
+Una comparación de precios "de verdad" con IA requeriría servicios de pago
+y mantenimiento continuo — esto es la versión honesta y gratuita que
+cumple el mismo propósito de orientarte.

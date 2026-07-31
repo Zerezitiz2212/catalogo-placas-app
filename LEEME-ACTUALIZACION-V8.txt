@@ -1,0 +1,58 @@
+ACTUALIZACIÓN V8 — App unificada con clasificación integrada
+================================================================
+
+QUÉ HA CAMBIADO EN ESTA VERSIÓN:
+
+1. ICONO NUEVO
+   Se ha sustituido el icono de la app (en Android y en el navegador) por
+   el logo de Electrónica Imperial que proporcionaste. Ya está aplicado en
+   todas las resoluciones necesarias, no hace falta tocar nada más.
+
+2. CLASIFICACIÓN DE FOTOS INTEGRADA (lo más importante)
+   Antes había que hacer las fotos con la app y LUEGO clasificarlas a mano
+   en el ordenador con un programa aparte (clasificador_fotos.py).
+   Ahora ya no hace falta ese segundo paso: al hacer cada foto dentro de
+   la propia app, te aparecen 7 botones para decir qué es esa foto
+   (Placa Base Delantera/Trasera, Fuente Delantera/Trasera, T-Con
+   Delantera/Trasera, o Variadas/Otro). Tócalo y sigue con la siguiente foto.
+
+3. EXPORTACIÓN YA LISTA PARA EL ORDENADOR
+   Al exportar las fotos (botón "Fotos (.zip)"), cada foto se guarda con
+   un nombre que ya incluye el tipo, por ejemplo:
+        001_50PUS7406-12_PlacaBaseDelantera_1.jpg
+   Esto es exactamente lo que necesita el script del ordenador para
+   generar los anuncios divididos (Base / Fuente / T-Con) sin pasos
+   intermedios.
+
+4. MARCA DE AGUA Y PANTALLA DE INICIO
+   Al abrir la app aparece un par de segundos una pantalla con el logo
+   y el texto "Creado por MCG". Además queda un texto pequeño fijo en la
+   parte de arriba de la app en todo momento.
+
+5. INSTRUCCIONES DENTRO DE LA APP
+   Hay un botón con un icono "ℹ️" arriba a la derecha que abre un resumen
+   de los pasos, paso a paso, en cualquier momento (incluye el comando
+   exacto a ejecutar en el ordenador al final del proceso).
+
+
+CÓMO GENERAR EL APK ACTUALIZADO
+--------------------------------
+Sigue los mismos pasos que la primera vez (ver LEEME-INSTALACION.txt),
+pero como ya tenías el proyecto instalado, basta con:
+
+    npm install          (solo si borraste node_modules)
+    npm run build         <- IMPORTANTE: recompila src/app.jsx a www/bundle.js
+    npx cap sync           <- copia los cambios de www/ y los iconos al proyecto Android
+    npx cap open android
+
+Y en Android Studio, igual que siempre:
+    Build > Build Bundle(s) / APK(s) > Build APK(s)
+
+
+SIGUIENTE PASO PENDIENTE (para el futuro)
+--------------------------------------------
+Falta integrar en un único paquete (o dejar muy claro el enlace entre
+ambos) la parte del ORDENADOR: el script "subir_placas_final.py" que sube
+los anuncios ya generados a la web. Por ahora ese script sigue siendo un
+programa aparte que se ejecuta en el PC, leyendo el ZIP de fotos y
+generando el Excel final de anuncios divididos.

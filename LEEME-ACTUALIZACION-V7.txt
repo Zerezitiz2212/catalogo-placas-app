@@ -1,0 +1,68 @@
+CATÁLOGO DE PLACAS — v7 (ubicación de almacén + solución al APK que no se actualizaba)
+==========================================================================================
+
+QUÉ AÑADE:
+  - Campo nuevo "Localización en almacén" (ej: "Estantería 3, Caja B"),
+    visible en el formulario, en la lista, y como columna en el Excel.
+
+SOBRE EL PROBLEMA DEL APK QUE NO SE ACTUALIZABA:
+  El código en sí siempre estuvo bien (lo tenía comprobado). El problema
+  es que, en algún punto del proceso en tu portátil, Android Studio se
+  quedó compilando una versión en caché en vez de coger los archivos
+  nuevos. Vamos a hacerlo de cero para evitar cualquier resto de versiones
+  anteriores.
+
+
+PASOS PARA ACTUALIZAR DE FORMA "A PRUEBA DE FALLOS"
+--------------------------------------------------------
+
+1. Descomprime este ZIP en una carpeta nueva.
+
+2. En tu carpeta de proyecto de siempre, copia y reemplaza:
+     - src/app.jsx
+     - www/  (carpeta entera)
+     - package.json
+
+3. IMPORTANTE — borra la carpeta "android" ENTERA de tu proyecto de
+   siempre (la que se creó con "npx cap add android" la primera vez).
+   Sí, bórrala del todo. Esto elimina cualquier caché rota.
+
+4. Abre la terminal en tu carpeta de proyecto y ejecuta, EN ESTE ORDEN:
+
+     npm install
+     npx cap add android
+     npx cap sync
+
+   El primer comando (cap add android) la vuelve a crear desde cero,
+   ya con los archivos actualizados dentro.
+
+5. Abre Android Studio:
+
+     npx cap open android
+
+6. Espera a que termine de indexar/sincronizar Gradle (barra de progreso
+   abajo, puede tardar un par de minutos porque es un proyecto nuevo).
+
+7. Genera el APK:
+
+     Build > Build Bundle(s) / APK(s) > Build APK(s)
+
+8. COMPRUEBA LA FECHA del archivo antes de pasarlo al móvil:
+
+     android/app/build/outputs/apk/debug/app-debug.apk
+
+   Debe tener la fecha de HOY, de hace un momento. Si la fecha es
+   antigua, algo se ha vuelto a torcer — avisa antes de instalar nada.
+
+9. Pasa el APK al móvil. Esta vez, antes de instalar:
+     - (Opcional pero recomendable) Desinstala la app vieja del todo
+       ANTES de instalar la nueva, para eliminar cualquier resto.
+
+     OJO: si desinstalas la app completa, se BORRAN las placas guardadas
+     (el guardado automático vive dentro de la propia app instalada).
+     Si tienes placas importantes guardadas, exporta antes el Excel
+     y el zip de fotos como copia de seguridad, o simplemente instala
+     encima sin desinstalar (normalmente basta con eso).
+
+10. Abre la app y confirma que ahora sí aparece "Localización en almacén"
+    en el formulario, y que el botón "Fotos (.zip)" funciona.

@@ -1,0 +1,78 @@
+CATÁLOGO DE PLACAS — ACTUALIZACIÓN v3
+========================================
+
+Qué añade esta versión:
+
+  1. GUARDADO PERSISTENTE: las placas ya NO se borran al cerrar la app.
+     Se guardan en el almacenamiento propio del teléfono automáticamente,
+     cada vez que añades o editas algo. Puedes cerrar la app, apagar el
+     móvil, lo que sea — al volver a abrir, tus placas siguen ahí.
+
+  2. EXCEL QUE FUNCIONA DE VERDAD EN EL MÓVIL: antes se quedaba colgado
+     porque el móvil no tiene una "carpeta de descargas de navegador"
+     como el ordenador. Ahora, al pulsar el botón Excel, se abre el menú
+     nativo de Android para elegir dónde mandarlo: Guardar en Archivos,
+     enviarlo por WhatsApp, subirlo a Drive, por correo, etc.
+
+  3. CÓDIGO DE BARRAS: además de leer el texto de la etiqueta (OCR), ahora
+     también busca un código de barras en la foto, por si la etiqueta lo
+     tiene. Si lo encuentra, lo usa como Nº de serie automáticamente
+     (es más fiable que el texto). Todo esto sigue funcionando offline.
+
+
+CÓMO ACTUALIZAR (mismo proceso que la vez anterior)
+--------------------------------------------------------
+
+1. Descomprime este ZIP en una carpeta nueva.
+
+2. Copia estos archivos/carpetas a tu carpeta de proyecto de siempre,
+   REEMPLAZANDO lo que había:
+
+     - src/app.jsx
+     - www/  (la carpeta entera)
+     - package.json
+
+   (No toques "android" ni "node_modules".)
+
+3. Abre la terminal en tu carpeta de proyecto de siempre y ejecuta:
+
+     npm install
+
+   (instalará 3 paquetes nuevos: guardado, compartir archivos, y lectura
+   de código de barras)
+
+4. Sincroniza:
+
+     npx cap sync
+
+5. Abre Android Studio (si no está abierto):
+
+     npx cap open android
+
+6. Genera el APK de nuevo:
+
+     Build > Build Bundle(s) / APK(s) > Build APK(s)
+
+7. El archivo está en:
+
+     android/app/build/outputs/apk/debug/app-debug.apk
+
+   Pásalo al móvil e instala encima del anterior.
+
+
+IMPORTANTE SOBRE EL GUARDADO
+---------------------------------
+Como ahora las placas se guardan solas, si desinstalas la app completamente
+(no solo actualizar, sino borrarla del todo) SÍ se perderían los datos
+guardados, porque van ligados a la app instalada. Para no perder nada,
+usa el botón Excel para hacer una copia de seguridad de vez en cuando
+mientras trabajas, sobre todo antes de instalar una versión nueva por
+si acaso.
+
+
+SOBRE EL CÓDIGO DE BARRAS
+------------------------------
+No todas las etiquetas de electrodomésticos llevan barras — muchas solo
+tienen el texto impreso. Si no encuentra ninguno, simplemente no rellena
+nada por esa vía y se queda con lo que lea el OCR de texto. No es un fallo,
+es normal.

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Catálogo Placas</string>
+    <string name="title_activity_main">Catálogo Placas</string>
+    <string name="package_name">com.catalogoplacas.app</string>
+    <string name="custom_url_scheme">com.catalogoplacas.app</string>
+</resources>

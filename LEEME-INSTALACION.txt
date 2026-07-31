@@ -1,0 +1,106 @@
+CATÁLOGO DE PLACAS — APK CERRADO, SIN SERVIDOR
+================================================
+
+Esta app está 100% empaquetada: React, ReactDOM y la librería de Excel
+YA ESTÁN incluidos dentro de www/bundle.js. No hace falta internet para
+que funcione, ni ahora ni nunca. Todo lo que ves en pwa/index.html y
+www/bundle.js se mete literalmente dentro del APK.
+
+Lo único que necesitas instalar es el software para COMPILAR el APK
+(una sola vez, en tu portátil).
+
+
+PASO 1 — Instalar Node.js
+--------------------------
+Descarga e instala desde: https://nodejs.org (versión LTS, el botón grande)
+Verifica que funciona abriendo una terminal (CMD / PowerShell / Terminal) y escribiendo:
+
+    node -v
+
+Debe mostrarte un número de versión.
+
+
+PASO 2 — Instalar Android Studio
+----------------------------------
+Descarga desde: https://developer.android.com/studio
+Instálalo con las opciones por defecto (incluye el "Android SDK", que es
+lo que realmente necesitamos). Ábrelo una vez para que termine de
+descargar los componentes del SDK. Puede tardar un rato, es normal
+(son varios GB).
+
+
+PASO 3 — Abrir una terminal en esta carpeta
+---------------------------------------------
+Descomprime este ZIP. Abre una terminal DENTRO de la carpeta descomprimida
+(en Windows: clic derecho dentro de la carpeta > "Abrir en Terminal";
+en Mac: clic derecho > "Nueva terminal en la carpeta").
+
+
+PASO 4 — Instalar las dependencias del proyecto
+--------------------------------------------------
+Ejecuta:
+
+    npm install
+
+Esto descarga Capacitor (el empaquetador) en tu ordenador. Tarda 1-2 minutos.
+
+
+PASO 5 — Añadir la plataforma Android
+----------------------------------------
+Ejecuta:
+
+    npx cap add android
+
+Esto crea una carpeta "android/" con un proyecto Android nativo completo,
+ya con tu app (www/) copiada dentro.
+
+
+PASO 6 — Sincronizar (por si tocas algo del contenido web)
+--------------------------------------------------------------
+Ejecuta:
+
+    npx cap sync
+
+(Si en el futuro editas src/app.jsx, antes de este paso ejecuta
+"npm run build" para regenerar www/bundle.js con tus cambios.)
+
+
+PASO 7 — Abrir el proyecto en Android Studio
+-------------------------------------------------
+Ejecuta:
+
+    npx cap open android
+
+Se abrirá Android Studio con el proyecto cargado. Espera a que termine
+de indexar (barra de progreso abajo).
+
+
+PASO 8 — Generar el APK
+---------------------------
+En Android Studio, en el menú superior:
+
+    Build  >  Build Bundle(s) / APK(s)  >  Build APK(s)
+
+Cuando termine, te saldrá un aviso abajo a la derecha: "locate" —
+haz clic ahí, o busca el archivo manualmente en:
+
+    android/app/build/outputs/apk/debug/app-debug.apk
+
+
+PASO 9 — Instalar en tu móvil
+----------------------------------
+Pasa app-debug.apk a tu móvil (cable USB, Drive, WhatsApp a ti mismo...).
+En el móvil: Ajustes > Seguridad > activa "Instalar apps desconocidas"
+para la app que uses para abrirlo (Archivos, WhatsApp, etc.) — solo la
+primera vez. Toca el .apk y dale a Instalar.
+
+
+LISTO
+-----
+La app queda instalada como cualquier otra app, con su icono, sin
+navegador, sin internet, sin servidor. Todo lo que fotografíes y
+guardes vive solo en el propio móvil.
+
+Si en algún momento quieres cambiar algo del diseño o añadir campos,
+edita src/app.jsx, ejecuta "npm run build", luego "npx cap sync", y
+repite el paso 8 en Android Studio para generar un APK actualizado.
