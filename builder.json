@@ -1,0 +1,16 @@
+{
+  "project": "catalogo-placas-capacitor",
+  "platform": "ios",
+  "github": {
+    "owner": "Zerezitiz2212",
+    "repo": "catalogo-placas-app"
+  },
+  "ios": {
+    "path": "ios"
+  },
+  "flutter": {
+    "watch": {}
+  },
+  "reactNative": {},
+  "mobai": {}
+}
